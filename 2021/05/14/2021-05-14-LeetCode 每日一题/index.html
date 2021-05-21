@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN en-US">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Naiv">
+
+
+
+    <meta name="description" content="Code for fun">
+
+
+    <meta name="keywords" content="学生,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,博客,人工智能,神经网络,深度学习,工科,python,Developer,Programmer,Coder,Geek">
+
+
+<title>LeetCode每日一题打卡 | Naiv&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/assets/blogImg/%E5%A4%B4%E5%83%8F.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1614813_fp9wxdcpr9c.css"
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Naiv&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categorys "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Naiv&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categorys "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">▶︎ 展开目录</a>
+    </div>
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a onclick="go_top()">△ 顶部</a>
+        <a onclick="go_bottom()">▽ 底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "▼ 收起目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "▶︎ 展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">LeetCode每日一题打卡</h1>
+            
+                <div class="post-meta">
+                    
+                        <!--作者:-->
+                        <i class="iconfont icon-user"></i>
+                        <a itemprop="author" rel="author" href="/">Naiv </a> &nbsp;
+                    
+
+                    
+                        <span class="post-time">
+                        <!--发布时间:-->
+                        <i class="iconfont icon-time"></i>
+                        <a href="#">May, 14, 2021  <!-- 改动过 &nbsp;&nbsp;0:00:00   -->    
+                        </a>   &nbsp;
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                        <!--分类:-->
+                        <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    <span id="/2021/05/14/2021-05-14-LeetCode%20%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" class="leancloud-visitors view" data-flag-title="LeetCode每日一题打卡">
+                        <text class="post-meta-item-text">
+                            <!--阅读数:-->
+                            <i class="iconfont icon-view"></i>
+                        </text>
+                        
+                        <text class="leancloud-visitors-count">加载中</text>
+                      </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><strong>LeetCode每日一题打卡开始于2021-05-14，预计打卡至大四毕业，总共两年多，我不想再当咸鱼了（逃。</strong></p>
+<h4 id="12-整数转罗马数字"><a href="#12-整数转罗马数字" class="headerlink" title="12. 整数转罗马数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-to-roman/">12. 整数转罗马数字</a></h4><p>2021-05-14，数电课延后一周再上，上完我就要开始学了。</p>
+<p><strong>方法一：模拟</strong></p>
+<p><strong>思路</strong></p>
+<p>根据罗马数字的唯一表示法，为了表示一个给定的整数<em>num</em>，我们寻找不超过<em>num</em>的最大符号值，将<em>num</em>减去该符号值，然后继续寻找不超过<em>num</em>的最大符号值，将该符号拼接在上一个找到的符号之后，循环直至<em>num</em>为0。最后的得到的字符即为<em>num</em>的罗马数字表示。</p>
+<p>编程时，可以建立一个数值-符号对的列表<em>valueSymbols</em>，按数值从大到小排列。遍历<em>valueSymbols</em>中的每个数值-符号对，若当前数值<em>value</em>不超过<em>num</em>则从<em>num</em>中不断减去<em>value</em>，直至<em>num</em>小于<em>value</em>，然后遍历下一个数值-符号对。若遍历中<em>num</em>为0则跳出循环。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pair&lt;<span class="keyword">int</span>, string&gt; valueSymbols[] = &#123;</span><br><span class="line">    &#123;<span class="number">1000</span>, <span class="string">&quot;M&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">900</span>, <span class="string">&quot;CM&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">500</span>, <span class="string">&quot;D&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">400</span>, <span class="string">&quot;CD&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">100</span>, <span class="string">&quot;C&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">90</span>, <span class="string">&quot;XC&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">50</span>, <span class="string">&quot;L&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">40</span>, <span class="string">&quot;XL&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">10</span>, <span class="string">&quot;X&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">9</span>, <span class="string">&quot;IX&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">5</span>, <span class="string">&quot;V&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">4</span>, <span class="string">&quot;IV&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="number">1</span>, <span class="string">&quot;I&quot;</span>&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">intToRoman</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        string roman;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp;[value, symbol] : valueSymbols)&#123; <span class="comment">//遍历数值-符号对</span></span><br><span class="line">            <span class="keyword">while</span>(num&gt;=value)&#123;	<span class="comment">//找到不超过当前数字的最大符号值</span></span><br><span class="line">                num -= value;</span><br><span class="line">                roman += symbol;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(num == <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">//当数字为0时退出循环</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> roman;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：<em>O</em>(1)。由于 <em>valueSymbols</em> 长度是固定的，且这 13 字符中的每个字符的出现次数均不会超过 3，因此循环次数有一个确定的上限。对于本题给出的数据范围，循环次数不会超过 15 次。</p>
+</li>
+<li><p>空间复杂度：<em>O</em>(1)。</p>
+</li>
+</ul>
+<h4 id="13-罗马数字转整数"><a href="#13-罗马数字转整数" class="headerlink" title="13. 罗马数字转整数"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/roman-to-integer/">13. 罗马数字转整数</a></h4><p>今天是2021-05-15，周六，可是为什么还有实验课啊，滑动变阻器坏了，实验没做出来，躺平~</p>
+<p><strong>方法一：模拟</strong></p>
+<p><strong>思路</strong></p>
+<p>通常情况下，罗马数字中小的数字在大的数字的右边。若输入的字符串满足该情况，那么可以将每个字符视作一个单独的值，累加每个字符对应的数值即可。</p>
+<p>例如<code>XXVII</code>可视作<code>X</code> + <code>X</code>+ <code>V</code>+ <code>I</code>+ <code>I</code> = 10 + 10 + 5 + 1 + 1 = 27。</p>
+<p>若存在小的数字在大的数字的左边的情况，根据规则需要减去小的数字。对于这种情况，我们也可以将每个字符视作一个单独的值，若一个数字的右侧的数字比它大，则该数字的符号取反。</p>
+<p>例如<code>XIV</code>可视作 <code>X</code> - <code>I</code> + <code>V</code>  = 10 - 1 + 5 = 14。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">romanToInt</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">    unordered_map&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; symbolValues = &#123;</span><br><span class="line">        &#123;<span class="string">&#x27;I&#x27;</span>, <span class="number">1</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;V&#x27;</span>, <span class="number">5</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;X&#x27;</span>, <span class="number">10</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;L&#x27;</span>, <span class="number">50</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;C&#x27;</span>, <span class="number">100</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;D&#x27;</span>, <span class="number">500</span>&#125;,</span><br><span class="line">        &#123;<span class="string">&#x27;M&#x27;</span>, <span class="number">1000</span>&#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n = s.<span class="built_in">length</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> value = symbolValues[s[i]];</span><br><span class="line">        <span class="keyword">if</span>(i&lt;n<span class="number">-1</span> &amp;&amp; value &lt; symbolValues[s[i+<span class="number">1</span>]]) <span class="comment">//判断后面一个字符对应的值是否比当前这个的值大</span></span><br><span class="line">            ans -= value;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            ans += value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：<em>O</em>(<em>n</em>)。其中n是字符串s的长度。</p>
+</li>
+<li><p>空间复杂度：<em>O</em>(<em>1</em>)。</p>
+</li>
+</ul>
+<h4 id="421-数组中两个数的最大异或值"><a href="#421-数组中两个数的最大异或值" class="headerlink" title="421. 数组中两个数的最大异或值"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-xor-of-two-numbers-in-an-array/">421. 数组中两个数的最大异或值</a></h4><p>2021-05-16，周日，玩了一上午的OW（破坏球真好玩）。</p>
+<p><strong>方法一：暴力</strong></p>
+<p>题目要求在<em>O</em>(n)的时间复杂度下完成，但暴力解法时间复杂度会上升到<em>O</em>(n^2)，用C++就会超时，而Java却AC了(不是很懂.jpg)。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findMaximumXOR</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; nums.length; j++) &#123;</span><br><span class="line">                ret = Math.max(nums[i]^nums[j], ret);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二：哈希表</strong></p>
+<p>这个方法来自官方题解，自己想不出别的了。</p>
+<p><strong>思路</strong></p>
+<p>设最大异或值为m。[从高到低依次求m的每一个bit]</p>
+<p>设x(k)表示x的从高到低的前k位。</p>
+<p>如何求m？已经求出m(k-1)，判断第k是否为1：设m第k位可以为1的条件是：存在x和y于nums，满足m(k)=x(k)^y(k)，否则m第k位是0。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMaximumXOR</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">30</span>; k&gt;=<span class="number">0</span>; --k)&#123;  <span class="comment">// 从高到低依次求m的每一个bit。</span></span><br><span class="line">            <span class="comment">//保存num(k)</span></span><br><span class="line">            unordered_set&lt;<span class="keyword">int</span>&gt; set;   </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num: nums)&#123;</span><br><span class="line">                set.<span class="built_in">insert</span>(num&gt;&gt;k);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 检查是否存在x和y于nums，满足m(k)=x(k)^y(k)</span></span><br><span class="line">            m = (m&lt;&lt;<span class="number">1</span>)+<span class="number">1</span>;   <span class="comment">//假设当前位为1</span></span><br><span class="line">            <span class="keyword">bool</span> canBe1 = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> num: nums)&#123;</span><br><span class="line">                <span class="keyword">if</span> (set.<span class="built_in">count</span>((num&gt;&gt;k)^m))&#123;</span><br><span class="line">                    canBe1 = <span class="literal">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!canBe1) --m;   <span class="comment">// 不存在存在x和y于nums，说明m不能为1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="993-二叉树的堂兄弟节点"><a href="#993-二叉树的堂兄弟节点" class="headerlink" title="993. 二叉树的堂兄弟节点"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/cousins-in-binary-tree/">993. 二叉树的堂兄弟节点</a></h4><p>2021-05-17，打卡第4天，上午有乒乓球课，玩得很过瘾啦~</p>
+<p><strong>前言</strong></p>
+<p>要想判断两个节点 xx 和 yy 是否为堂兄弟节点，我们就需要求出这两个节点分别的「深度」以及「父节点」。</p>
+<p>因此，我们可以从根节点开始，对树进行一次遍历，在遍历的过程中维护「深度」以及「父节点」这两个信息。当我们遍历到 xx 或 yy 节点时，就将信息记录下来；当这两个节点都遍历完成了以后，我们就可以退出遍历的过程，判断它们是否为堂兄弟节点了。</p>
+<p>常见的遍历方法有两种：深度优先搜索和广度优先搜索。</p>
+<p><strong>方法一：深度优先搜索</strong></p>
+<p><strong>思路与算法</strong></p>
+<p>我们只需要在深度优先搜索的递归函数中增加表示「深度」以及「父节点」的两个参数即可。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">//x的信息</span></span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    TreeNode* x_parent;</span><br><span class="line">    <span class="keyword">int</span> x_depth;</span><br><span class="line">    <span class="keyword">bool</span> x_found = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//y的信息</span></span><br><span class="line">    <span class="keyword">int</span> y;</span><br><span class="line">    TreeNode* y_parent;</span><br><span class="line">    <span class="keyword">int</span> y_depth;</span><br><span class="line">    <span class="keyword">bool</span> y_found = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isCousins</span><span class="params">(TreeNode*&amp; root, <span class="keyword">int</span>&amp; x, <span class="keyword">int</span>&amp; y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;x = x;</span><br><span class="line">        <span class="keyword">this</span>-&gt;y = y;</span><br><span class="line">        <span class="built_in">dfs</span>(root, <span class="number">0</span> ,<span class="literal">nullptr</span>);</span><br><span class="line">        <span class="keyword">return</span> x_depth ==y_depth &amp;&amp; x_parent != y_parent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* node, <span class="keyword">int</span> depth, TreeNode* parent)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node==<span class="literal">nullptr</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;val == x) <span class="built_in">tie</span>(x_parent, x_depth, x_found) = <span class="built_in">tuple</span>(parent, depth, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(node-&gt;val == y) <span class="built_in">tie</span>(y_parent, y_depth, y_found) = <span class="built_in">tuple</span>(parent, depth, <span class="literal">true</span>); </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//找到了两个节点就提前退出遍历，但不退出对最坏情况下的时间复杂度也不会有影响。</span></span><br><span class="line">        <span class="keyword">if</span>(x_found &amp;&amp; y_found) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">dfs</span>(node-&gt;left, depth+<span class="number">1</span>, node);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(x_found &amp;&amp; y_found) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">dfs</span>(node-&gt;right, depth+<span class="number">1</span>, node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(n)，其中 n 是树中的节点个数。在最坏情况下，我们需要遍历整棵树，时间复杂度为 O(n)。</p>
+<p>空间复杂度：O(n)，即为深度优先搜索的过程中需要使用的栈空间。在最坏情况下，树呈现链状结构，递归的深度为 O(n)。</p>
+<p><strong>方法二：广度优先搜索</strong></p>
+<p><strong>思路来自<a target="_blank" rel="noopener" href="https://leetcode-cn.com/u/qiank/">Qian</a></strong></p>
+<p>因为在BFS中，我们使用的是层序遍历，如果每次遍历一层，那么这一层的元素的深度是相同的。</p>
+<p>因此我们在每一层，看看是否有出现 x 和 y，其中分为以下三种情况：</p>
+<ul>
+<li><p><code>x</code> 和 <code>y</code>都没出现 → 那只能往下一层继续找了</p>
+</li>
+<li><p><code>x</code> 和 <code>y</code> 只出现一个 → 两个元素的深度不同，不可能为兄弟，返回<code>false</code></p>
+</li>
+<li><p><code>x</code> 和 <code>y</code>都出现了，好耶，但是还不够好</p>
+<ul>
+<li><p><code>x</code> 和 <code>y</code> 父节点相同 → 不是堂兄弟，是亲兄弟，不行，返回<code>false</code></p>
+</li>
+<li><p><code>x</code> 和 <code>y</code>父节点不同 → 满足题目条件了，好耶，返回<code>true</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>众所周知，BFS需要用到队列，那么我们应该如何设计队列的数据类型？<br>在这里，我采用了 <code>pair&lt;TreeNode*, TreeNode*&gt;</code>（其实<code>pair&lt;TreeNode*, int&gt;</code>也可以），其中<code>pair</code>中，第一个元素记录指向当前结点的指针，第二个元素记录指向当前结点的父结点的指针，这样就可以完美应对上面所说的三种情况了。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> PTT = pair&lt;TreeNode*, TreeNode*&gt;;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isCousins</span><span class="params">(TreeNode* root, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        queue&lt;PTT&gt; q; <span class="comment">//q.first记录当前节点的指针，q.second记录当前节点的父节点的指针</span></span><br><span class="line">        q.<span class="built_in">push</span>(&#123;root, <span class="literal">nullptr</span>&#125;);</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="keyword">int</span> n = q.<span class="built_in">size</span>(); <span class="comment">//记录当前层需要遍历的节点个数</span></span><br><span class="line">            vector&lt;TreeNode*&gt; rec_parent; <span class="comment">//记录每层找到的x,y的父节点</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123; <span class="comment">//处理每层节点</span></span><br><span class="line">                <span class="keyword">auto</span> [cur, parent] = q.<span class="built_in">front</span>(); <span class="comment">//每循环一次就更新一次当前将要遍历的节点</span></span><br><span class="line">                q.<span class="built_in">pop</span>(); <span class="comment">//取得这个节点后将其从队头弹出</span></span><br><span class="line">                <span class="keyword">if</span>(cur-&gt;val == x || cur-&gt;val == y) <span class="comment">//检查当前节点的值是否与x,y之一相等</span></span><br><span class="line">                    rec_parent.<span class="built_in">push_back</span>(parent);</span><br><span class="line">                <span class="keyword">if</span>(cur-&gt;left) q.<span class="built_in">push</span>(&#123;cur-&gt;left, cur&#125;); <span class="comment">//检查当前节点的左子节点是否存在，存在就加入队列，同时记录其父节点</span></span><br><span class="line">                <span class="keyword">if</span>(cur-&gt;right) q.<span class="built_in">push</span>(&#123;cur-&gt;right, cur&#125;);<span class="comment">//检查当前节点的右子节点是否存在，存在就加入队列，同时记录其父节点</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//遍历完一层之后检查是否找到了x,y</span></span><br><span class="line">            <span class="keyword">if</span>(rec_parent.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="comment">//x,y都没出现</span></span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(rec_parent.<span class="built_in">size</span>() == <span class="number">1</span>) <span class="comment">//x,y出现其一</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(rec_parent.<span class="built_in">size</span>() == <span class="number">2</span>) <span class="comment">//x,y都出现，但还需判断父节点是否相同</span></span><br><span class="line">                <span class="keyword">return</span> rec_parent[<span class="number">0</span>] != rec_parent[<span class="number">1</span>]; <span class="comment">//父节点不同则返回true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：O(n)，其中 n 是树中的节点个数。在最坏情况下，我们需要遍历整棵树，时间复杂度为 O(n)。</p>
+</li>
+<li><p>空间复杂度：O(n)，即为广度优先搜索的过程中需要使用的队列空间。</p>
+</li>
+</ul>
+<h4 id="1442-形成两个异或相等数组的三元组数目"><a href="#1442-形成两个异或相等数组的三元组数目" class="headerlink" title="1442. 形成两个异或相等数组的三元组数目"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/">1442. 形成两个异或相等数组的三元组数目</a></h4><p>2021-05-18，轻松的一天，只有一节德语课。</p>
+<p><strong>前言</strong></p>
+<p>记S(n)  , n=0,1,2,3<br>$$<br>S(0) = 0, S(1) = arr[0], S(2) = arr[0] ⊕ arr[1], S(n) = arr[0] ⊕ arr[1] ⊕ … ⊕ arr[n-1]<br>$$<br>为该数组的<strong>异或前缀和</strong>，由异或的性质可知：<br>$$<br>a = S(i-1) ⊕ S(j-1) = arr[i] ⊕ arr[i+1] ⊕ arr[i+2] ⊕ … ⊕  arr[j-1]<br>$$</p>
+<p>$$<br>b = S(j-1) ⊕ S(k) = arr[j-1] ⊕ arr[j] ⊕ arr[j+1] ⊕ … ⊕  arr[k]<br>$$</p>
+<p><strong>方法一：暴力</strong></p>
+<p><strong>思路</strong></p>
+<p>依次枚举<code>i</code>，<code>j</code>，<code>k</code>的值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countTriplets</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = arr.<span class="built_in">size</span>();</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">pre_arr</span><span class="params">(n+<span class="number">1</span>)</span></span>; <span class="comment">//保存异或前缀和</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n+<span class="number">1</span>; i++)&#123; <span class="comment">//从1开始存贮异或前缀和方便理解</span></span><br><span class="line">            pre_arr[i] = pre_arr[i<span class="number">-1</span>] ^ arr[i<span class="number">-1</span>];  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> a,b,ans=<span class="number">0</span>;   </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k=j;k&lt;=n;k++)&#123;</span><br><span class="line">                    a = pre_arr[i<span class="number">-1</span>] ^ pre_arr[j<span class="number">-1</span>];</span><br><span class="line">                    b = pre_arr[j<span class="number">-1</span>] ^ pre_arr[k];    </span><br><span class="line">                    <span class="keyword">if</span> (a==b) ans++; <span class="comment">//ans += a==b;</span></span><br><span class="line">                &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(n^3)，其中 n 是数组 arr 的长度。</p>
+<p>空间复杂度：O(n)</p>
+<p><strong>方法二：二重循环</strong></p>
+<p><strong>思路</strong></p>
+<p>由异或的性质可知，<br>$$<br>a ⊕ b = 0时，arr[i] ⊕ … ⊕ arr[j-1] ⊕ arr[j] ⊕ … ⊕ arr[k] = 0<br>$$<br>因此在 i 之前的前缀异或和到 k 时不会变，即<code>pre_arr[i-1] = pre_arr[k]</code>。</p>
+<p>其另一点重点在于在区间 <code>[i, k]</code>内 j在哪并不重要, 因为无论<code> j</code>在哪，<code>i</code>到<code>k</code>的异或值都等于 0，不影响结果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countTriplets</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = arr.<span class="built_in">size</span>(), ans = <span class="number">0</span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">pre_arr</span><span class="params">(n+<span class="number">1</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n+<span class="number">1</span>;i++)</span><br><span class="line">            pre_arr[i] = pre_arr[i<span class="number">-1</span>] ^ arr[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=i+<span class="number">1</span>;k&lt;=n;k++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((pre_arr[i<span class="number">-1</span>] ^ pre_arr[k]) == <span class="number">0</span>) <span class="comment">//pre_arr[i-1] == pre_arr[k]</span></span><br><span class="line">                    ans += k-i;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(n^2)</p>
+<p>空间复杂度：O(n)</p>
+<h4 id="1738-找出第-K-大的异或坐标值"><a href="#1738-找出第-K-大的异或坐标值" class="headerlink" title="1738. 找出第 K 大的异或坐标值"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-kth-largest-xor-coordinate-value/">1738. 找出第 K 大的异或坐标值</a></h4><p>2021-05-19，一看就会，一写就错是我了。</p>
+<p><strong>思路</strong>（来自官方题解）</p>
+<p>我们用 ⊕ 表示按位异或运算。</p>
+<p>由于「按位异或运算」与「加法运算」有着十分相似的性质，它们都满足交换律：<br>$$<br>a⊕b=b⊕a<br>$$<br>以及结合律：<br>$$<br>(a⊕b)⊕c=a⊕(b⊕c)<br>$$<br>因此我们可以使用「前缀和」这一技巧对按位异或运算的结果进行维护。由于本题中给定的矩阵 <code>matrix</code> 是二维的，因此我们需要使用二维前缀和。</p>
+<p>设二维前缀和 <code>pre(i,j)</code> 表示矩阵 <code>matrix</code> 中所有满足 <code>0≤x&lt;i</code> 且 <code>0≤y&lt;j</code> 的元素执行按位异或运算的结果 。与一维前缀和类似，要想快速得到 <code>pre(i,j)</code>，我们需要已经知道 <code>pre(i−1,j)</code>，<code>pre(i,j−1)</code> 以及<code>pre(i−1,j−1)</code> 的结果，即：</p>
+<p>$$<br>pre[i][j] = pre[i-1][j]⊕pre[i][j-1]⊕pre[i-1][j-1]⊕matrix[i-1][j-1];<br>$$<br>当我们将 <code>pre(i−1,j)</code> 和 <code>pre(i,j−1)</code> 进行按位异或运算后，由于对一个数 xx 异或两次 <code>y</code>，结果仍然为 <code>x</code> 本身，即：<br>$$<br>x⊕y⊕y=x<br>$$<br>因此 <strong><code>pre(i−1,j−1)</code> 对应区域的按位异或结果被抵消</strong>，我们需要将其补上，并对位置 <code>(i,j)</code> 的元素进行按位异或运算，这样就得到了 <code>pre(i,j)</code>。</p>
+<p>在得到了所有的二维前缀和之后，我们只需要找出其中第 kk 大的元素即为答案。这一步我们可以直接将 <code>mn</code> 个二维前缀和进行排序后返第 <code>k</code> 大的元素。</p>
+<p><strong>细节</strong></p>
+<p>在二维前缀和的计算过程中，如果我们正在计算首行或者首列，即 <code>i=0</code> 或 <code>j=0</code>，此时例如 <code>pre(i−1,j−1)</code> 是一个超出下标范围的结果。因此我们可以使用一个 <code>(m+1)×(n+1)</code> 的二维矩阵，**将首行和首列空出来赋予默认值 <code>0</code>**，并使用接下来的 <code>m</code> 行和 <code>n</code> 列存储二维前缀和，这样就不必进行下标范围的判断了。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">kthLargestValue</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = matrix.<span class="built_in">size</span>(), n = matrix[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">pre</span>(m+<span class="number">1</span>, vector&lt;<span class="keyword">int</span>&gt;(n+<span class="number">1</span>));</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; results;</span><br><span class="line">        <span class="comment">//求出二维异或前缀和，并用一个一维向量存贮结果</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">                pre[i][j] = pre[i<span class="number">-1</span>][j]^pre[i][j<span class="number">-1</span>]^pre[i<span class="number">-1</span>][j<span class="number">-1</span>]^matrix[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">                results.<span class="built_in">push_back</span>(pre[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="built_in">sort</span>(results.<span class="built_in">begin</span>(),results.<span class="built_in">end</span>(),greater&lt;<span class="keyword">int</span>&gt;()); <span class="comment">//对异或前缀和从小到大排序</span></span><br><span class="line">        <span class="keyword">return</span> results[k<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：O(mnlog(mn))。计算二维前缀和的时间复杂度为 O(mn)，排序的时间复杂度为 O(mnlog(mn))，因此总时间复杂度为 O(mnlog(mn))。</p>
+</li>
+<li><p>空间复杂度：O(mn)，即为存储二维前缀和需要的空间。</p>
+</li>
+</ul>
+<h4 id="692-前K个高频单词"><a href="#692-前K个高频单词" class="headerlink" title="692. 前K个高频单词"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/top-k-frequent-words/">692. 前K个高频单词</a></h4><p>2021-5-20，有人相爱，有人夜里开车看海，有人520刷LeetCode (:</p>
+<p><strong>方法一：哈希表 + 排序</strong><br><strong>思路及算法</strong></p>
+<p>我们可以预处理出每一个单词出现的频率，然后依据每个单词出现的频率降序排序，最后返回前 <code>k</code> 个字符串即可。</p>
+<p>具体地，我们利用哈希表记录每一个字符串出现的频率，然后将哈希表中所有字符串进行排序，排序时，如果两个字符串出现频率相同，那么我们让两字符串中字典序较小的排在前面，否则我们让出现频率较高的排在前面。最后我们只需要保留序列中的前 <code>k</code> 个字符串即可。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;string&gt; <span class="title">topKFrequent</span><span class="params">(vector&lt;string&gt;&amp; words, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;string, <span class="keyword">int</span>&gt; map;</span><br><span class="line">        vector&lt;string&gt; rec;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; word:words)</span><br><span class="line">            map[word]++;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; [key, value] : map)&#123;</span><br><span class="line">            rec.<span class="built_in">emplace_back</span>(key);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">sort</span>(rec.<span class="built_in">begin</span>(),rec.<span class="built_in">end</span>(), [&amp;](string&amp; a, string&amp; b)&#123;</span><br><span class="line">            <span class="keyword">if</span>(map[a]==map[b]) <span class="keyword">return</span> a &lt; b;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> map[a] &gt; map[b];</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        sort(rec.begin(), rec.end(), [&amp;](string&amp; a, string&amp; b) -&gt; bool &#123;</span></span><br><span class="line"><span class="comment">            return cnt[a] == cnt[b] ? a &lt; b : cnt[a] &gt; cnt[b];</span></span><br><span class="line"><span class="comment">        &#125;);     </span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"></span><br><span class="line">        rec.<span class="built_in">erase</span>(rec.<span class="built_in">begin</span>()+k,rec.<span class="built_in">end</span>()); <span class="comment">//擦除 第k个出现次数最多的单词 后面的所有单词,即剩下了前k个</span></span><br><span class="line">        <span class="keyword">return</span> rec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：<code>O(l×n+l×mlogm)</code>，其中 <code>n</code> 表示给定字符串序列的长度，<code>l</code> 表示字符串的平均长度，<code>m</code> 表示实际字符串种类数。我们需要 <code>l×n</code> 的时间将字符串插入到哈希表中，以及 <code>l × mlogm</code> 的时间完成字符串比较（最坏情况下所有字符串出现频率都相同，我们需要将它们两两比较）。</p>
+</li>
+<li><p>空间复杂度：<code>O(l×m)</code>，其中 <code>l</code> 表示字符串的平均长度，<code>m</code> 表示实际字符串种类数。哈希表和生成的排序数组空间占用均为 <code>O(l×m)</code>。</p>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>作者:</span>
+                        <span>Naiv</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/LeetCode/">
+                            <i class="iconfont icon-tag1"></i>
+                            LeetCode
+                        </a>
+                    
+                        <a href="/tags/%E6%AF%8F%E6%97%A5%E6%89%93%E5%8D%A1/">
+                            <i class="iconfont icon-tag1"></i>
+                            每日打卡
+                        </a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="/">
+                    <i class="iconfont icon-home"></i>
+                    主页
+                </a>
+                <span>· </span>
+                <a href="javascript:window.history.back();">
+                    <i class="iconfont icon-back"></i>
+                    返回
+                </a>
+                
+                
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/04/18/2021-04-18-%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8F%82%E5%8A%A0%E8%93%9D%E6%A1%A5%E6%9D%AF/">记第一次参加蓝桥杯</a>
+            
+        </section>
+        <br>
+        
+            <section id="comments" class="comments">
+              <style>
+                  .comments{ margin-top: 30px;}
+                  .v .vlist .vcard .vcontent {padding-top: 0;}
+                  .vcontent p { color:grey; margin-bottom: 10px;}
+                  .v * {line-height: normal;}
+                  .v .vwrap  {border-radius: 0px; padding: 10px;}
+                  .v .vbtn {border-radius: 0px;}
+                  .v code, .v pre {border-radius: 0px;}
+                  .v .vlist .vcard .vhead .vsys {border-radius: 1px; padding: 2px;}
+                  .v .vlist .vcard .vhead .vnick {color: #2d96bd;}
+                  .v .vlist .vcard .vh .vmeta .vat{color: #c7254e;}
+                  .v .vlist .vcard {padding-top: 0;}
+                  .v .vlist .vcard .vimg { width: 2.5em; height: 2.5em; }
+                  .v .vlist .vcard .vquote .vimg { width: 2.5em; height: 2.5em; }
+              </style>
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '.valine_comment',
+        app_id: '1PTJXbrdVcQCMR1j0JLlpHCU-gzGzoHsz',
+        app_key: '56lf22kttbniHlMSEFsawHHc',
+        placeholder: '想对作者说点什么...',
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        visitor: 'true'
+    });
+</script>
+            </section>
+        
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Naiv | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>   <!--改动过 & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a>  -->   </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

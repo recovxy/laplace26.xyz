@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN en-US">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Naiv">
+
+
+
+    <meta name="description" content="Code for fun">
+
+
+    <meta name="keywords" content="学生,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,博客,人工智能,神经网络,深度学习,工科,python,Developer,Programmer,Coder,Geek">
+
+
+<title>初识神经网络——张量 | Naiv&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/assets/blogImg/%E5%A4%B4%E5%83%8F.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1614813_fp9wxdcpr9c.css"
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Naiv&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categorys "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Naiv&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categorys "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">▶︎ 展开目录</a>
+    </div>
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a onclick="go_top()">△ 顶部</a>
+        <a onclick="go_bottom()">▽ 底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "▼ 收起目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "▶︎ 展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">初识神经网络——张量</h1>
+            
+                <div class="post-meta">
+                    
+                        <!--作者:-->
+                        <i class="iconfont icon-user"></i>
+                        <a itemprop="author" rel="author" href="/">Naiv </a> &nbsp;
+                    
+
+                    
+                        <span class="post-time">
+                        <!--发布时间:-->
+                        <i class="iconfont icon-time"></i>
+                        <a href="#">December, 11, 2020  <!-- 改动过 &nbsp;&nbsp;10:51:36   -->    
+                        </a>   &nbsp;
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                        <!--分类:-->
+                        <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    <span id="/2020/12/11/2020-12-11-%E5%88%9D%E8%AF%86%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E5%BC%A0%E9%87%8F/" class="leancloud-visitors view" data-flag-title="初识神经网络——张量">
+                        <text class="post-meta-item-text">
+                            <!--阅读数:-->
+                            <i class="iconfont icon-view"></i>
+                        </text>
+                        
+                        <text class="leancloud-visitors-count">加载中</text>
+                      </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h4 id="1-1-张量（tensor）"><a href="#1-1-张量（tensor）" class="headerlink" title="1.1 张量（tensor）"></a>1.1 张量（tensor）</h4><p>在神经网络中，一堆存储在多维Numpy数组中的数据，就可称之为<strong>张量</strong>。它的核心概念在于，它是一个<strong>数据容器</strong>。它包含的数据几乎总是数值数据，因此它是数字的容器。</p>
+<p>例如，我们熟悉的<strong>矩阵</strong>，它是二维张量。张量是矩阵向任意维度的推广 [注意，张量的<strong>维度</strong>（dimension）通常叫做<strong>轴</strong>（axis）]。</p>
+<span id="more"></span>
+
+<h4 id="1-2-标量-0D张量"><a href="#1-2-标量-0D张量" class="headerlink" title="1.2 标量(0D张量)"></a>1.2 标量(0D张量)</h4><p>仅包含一个数字的张量叫做标量（scalar，也叫标量张量、零维张量、0D张量）。在Numpy中，一个float32或float64的数字就是一个标量张量（或标量数组）。可以使用ndim属性来查看一个Numpy张量的轴的个数。标量张量有0个轴（ndim == 0）。张量轴的个数也叫<strong>阶</strong>（rank）。下面是一个是Numpy标量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = np.array(<span class="number">26</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array(<span class="number">26</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.ndim</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-向量（1D张量）"><a href="#1-3-向量（1D张量）" class="headerlink" title="1.3 向量（1D张量）"></a>1.3 向量（1D张量）</h4><p>数字组成的数组叫做<strong>向量</strong>（vector）或是一维张量（1D张量）。一维张量只有一个轴。下面是一个Numpy向量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = np.array([<span class="number">21</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">254</span>, <span class="number">1</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line">array([<span class="number">21</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">254</span>, <span class="number">1</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.ndim</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这是 一个有 5个元素的向量，所以被称为<u>5D向量</u>。不要把<u>5D张量</u>和<u>5D向量</u>弄混！5D向量只有一个轴，沿着轴有5个维度，而5D张量有5个轴（沿着每个轴可能有任意个维度）。<strong>维度</strong>可以表示沿着某个轴上的<u>元素个数</u>（比如5D向量），也可以表示张量中<u>轴的个数</u>（比如5D张量）。如果感到混乱，对于后面一种情况，更准确的说法是<strong>5阶张量</strong>（张量的阶数即轴的个数），但<strong>5D张量</strong>这种模糊的写法更常见。</p>
+<h4 id="1-4-矩阵（2D张量）"><a href="#1-4-矩阵（2D张量）" class="headerlink" title="1.4 矩阵（2D张量）"></a>1.4 矩阵（2D张量）</h4><p>向量组成的数组叫做<strong>矩阵</strong>（matrix）或二维张量（2D张量）。矩阵有2个轴（通常叫做<strong>行</strong>和<strong>列</strong>）。可以将矩阵直观的理解为数字组成的矩形网格。下面是一个Numpy矩阵。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = np.array([[<span class="number">34</span>, <span class="number">8</span>, <span class="number">95</span>, <span class="number">10</span>, <span class="number">3</span>],</span><br><span class="line">                  [<span class="number">68</span>, <span class="number">46</span>, <span class="number">96</span>, <span class="number">83</span>, <span class="number">53</span>],</span><br><span class="line">                  [<span class="number">96</span>, <span class="number">75</span>, <span class="number">326</span>, <span class="number">97</span>, <span class="number">7</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.ndim</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-5-3D张量与更高维张量"><a href="#1-5-3D张量与更高维张量" class="headerlink" title="1.5 3D张量与更高维张量"></a>1.5 3D张量与更高维张量</h4><p>将多个矩阵组合成一个新的数组，可以得到一个3D张量。可以将其值观的理解为数字组成的立方体。下面是一个Numpy的3D张量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = np.array([[[<span class="number">21</span>, <span class="number">4</span>, <span class="number">54</span>, <span class="number">21</span>],</span><br><span class="line">                   [<span class="number">86</span>, <span class="number">77</span>, <span class="number">0</span>, <span class="number">31</span>],</span><br><span class="line">                   [<span class="number">90</span>, <span class="number">9</span>, <span class="number">51</span>, <span class="number">74</span>]],</span><br><span class="line">                  [[<span class="number">10</span>, <span class="number">65</span>, <span class="number">9</span>, <span class="number">65</span>],</span><br><span class="line">                   [<span class="number">30</span>, <span class="number">63</span>, <span class="number">51</span>, <span class="number">34</span>],</span><br><span class="line">                   [<span class="number">46</span>, <span class="number">26</span>, <span class="number">96</span>, <span class="number">66</span>]],</span><br><span class="line">                  [[<span class="number">85</span>, <span class="number">82</span>, <span class="number">29</span>,  <span class="number">0</span>],</span><br><span class="line">                   [<span class="number">78</span>, <span class="number">49</span>, <span class="number">48</span>, <span class="number">59</span>],</span><br><span class="line">                   [<span class="number">84</span>, <span class="number">89</span>, <span class="number">54</span>, <span class="number">47</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.ndim</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-6-关键属性"><a href="#1-6-关键属性" class="headerlink" title="1.6 关键属性"></a>1.6 关键属性</h4><p>张量是由以下三个关键属性来定义的。</p>
+<ul>
+<li><p><strong>轴的个数（阶）</strong>。例如，3D张量有3个轴，矩阵（2D张量）有2个轴。在Numpy等Python库中也叫张量的ndim。</p>
+</li>
+<li><p><strong>形状</strong>。这是一个整数元组。表示张量沿着每个轴的维度大小（元素个数）。例如，矩阵的形状（a, b），3D张量的形状为（a, b, c）。向量的形状只包含一个元素，比如前面1.3中的例子形状为（5，），而标量的形状为空，即（）。</p>
+</li>
+<li><p><strong>数据类型</strong>。这是张量中所包含数据的类型，常见的有float32、float64、uint8等。极少数会遇到字符（char）张量。注意，Numpy（以及大多数其他库）中不存在字符串张量，因为张量存储在预先分配的连续内存段中，而字符串的长度是可变的，无法用这种方式存储。</p>
+</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>作者:</span>
+                        <span>Naiv</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                            <i class="iconfont icon-tag1"></i>
+                            深度学习
+                        </a>
+                    
+                        <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                            <i class="iconfont icon-tag1"></i>
+                            神经网络
+                        </a>
+                    
+                        <a href="/tags/python/">
+                            <i class="iconfont icon-tag1"></i>
+                            python
+                        </a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="/">
+                    <i class="iconfont icon-home"></i>
+                    主页
+                </a>
+                <span>· </span>
+                <a href="javascript:window.history.back();">
+                    <i class="iconfont icon-back"></i>
+                    返回
+                </a>
+                
+                
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/12/16/2020-12-16-%E7%94%A8Keras%E8%BF%9B%E8%A1%8C%E6%89%8B%E5%86%99%E5%AD%97%E4%BD%93%E8%AF%86%E5%88%AB%EF%BC%88MNIST%E6%95%B0%E6%8D%AE%E9%9B%86%EF%BC%89/">用Keras进行手写字体识别（MNIST数据集）</a>
+            
+            
+            <a class="next" rel="next" href="/2020/11/24/2020-11-24-%E4%B8%80%E5%88%99%E6%8E%A8%E6%96%87%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/">一则推文引发的思考</a>
+            
+        </section>
+        <br>
+        
+            <section id="comments" class="comments">
+              <style>
+                  .comments{ margin-top: 30px;}
+                  .v .vlist .vcard .vcontent {padding-top: 0;}
+                  .vcontent p { color:grey; margin-bottom: 10px;}
+                  .v * {line-height: normal;}
+                  .v .vwrap  {border-radius: 0px; padding: 10px;}
+                  .v .vbtn {border-radius: 0px;}
+                  .v code, .v pre {border-radius: 0px;}
+                  .v .vlist .vcard .vhead .vsys {border-radius: 1px; padding: 2px;}
+                  .v .vlist .vcard .vhead .vnick {color: #2d96bd;}
+                  .v .vlist .vcard .vh .vmeta .vat{color: #c7254e;}
+                  .v .vlist .vcard {padding-top: 0;}
+                  .v .vlist .vcard .vimg { width: 2.5em; height: 2.5em; }
+                  .v .vlist .vcard .vquote .vimg { width: 2.5em; height: 2.5em; }
+              </style>
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '.valine_comment',
+        app_id: '1PTJXbrdVcQCMR1j0JLlpHCU-gzGzoHsz',
+        app_key: '56lf22kttbniHlMSEFsawHHc',
+        placeholder: '想对作者说点什么...',
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        visitor: 'true'
+    });
+</script>
+            </section>
+        
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Naiv | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>   <!--改动过 & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a>  -->   </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

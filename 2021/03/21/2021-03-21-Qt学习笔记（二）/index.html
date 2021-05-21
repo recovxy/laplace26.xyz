@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN en-US">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Naiv">
+
+
+
+    <meta name="description" content="Code for fun">
+
+
+    <meta name="keywords" content="学生,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,博客,人工智能,神经网络,深度学习,工科,python,Developer,Programmer,Coder,Geek">
+
+
+<title>Qt学习笔记（二） | Naiv&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/assets/blogImg/%E5%A4%B4%E5%83%8F.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1614813_fp9wxdcpr9c.css"
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Naiv&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categorys "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Naiv&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categorys "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">▶︎ 展开目录</a>
+    </div>
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a onclick="go_top()">△ 顶部</a>
+        <a onclick="go_bottom()">▽ 底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "▼ 收起目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "▶︎ 展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Qt学习笔记（二）</h1>
+            
+                <div class="post-meta">
+                    
+                        <!--作者:-->
+                        <i class="iconfont icon-user"></i>
+                        <a itemprop="author" rel="author" href="/">Naiv </a> &nbsp;
+                    
+
+                    
+                        <span class="post-time">
+                        <!--发布时间:-->
+                        <i class="iconfont icon-time"></i>
+                        <a href="#">March, 21, 2021  <!-- 改动过 &nbsp;&nbsp;0:00:00   -->    
+                        </a>   &nbsp;
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                        <!--分类:-->
+                        <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    <span id="/2021/03/21/2021-03-21-Qt%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="leancloud-visitors view" data-flag-title="Qt学习笔记（二）">
+                        <text class="post-meta-item-text">
+                            <!--阅读数:-->
+                            <i class="iconfont icon-view"></i>
+                        </text>
+                        
+                        <text class="leancloud-visitors-count">加载中</text>
+                      </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="1-信号和槽机机制"><a href="#1-信号和槽机机制" class="headerlink" title="1 信号和槽机机制"></a>1 信号和槽机机制</h1><p>信号槽是 Qt 框架引以为豪的机制之一。所谓信号槽，实际就是观察者模式。<strong>当某个事件发生之后</strong>，比如，按钮检测到自己被点击了一下，<strong>它就会发出一个信号（signal）</strong>。这种发出是没有目的的，类似广播。<strong>如果有对象对这个信号感兴趣，它就会使用连接（connect）函数</strong>，意思是，<strong>将想要处理的信号和自己的一个函数（称为槽（slot））绑定来处理这个信号</strong>。也就是说，<strong>当信号发出时，被连接的槽函数会自动被回调</strong>。这就类似观察者模式：当发生了感兴趣的事件，某一个操作就会被自动触发。（这里提一句，<strong>Qt 的信号槽使用了额外的处理来实现，并不是 GoF 经典的观察者模式的实现方式</strong>。）</p>
+<h2 id="1-1-信号和槽"><a href="#1-1-信号和槽" class="headerlink" title="1.1 信号和槽"></a>1.1 信号和槽</h2><p><img src="/assets/Qt.assets/01_01.jpg" alt="01_01"></p>
+<p>项羽宴请刘邦的故事形象的说明了信号和槽的工作方式。</p>
+<p>为了体验一下信号槽的使用，我们以一段简单的代码说明：</p>
+<p>l  Qt5 的书写方式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QPushButton&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">    <span class="function">QPushButton <span class="title">button</span><span class="params">(<span class="string">&quot;Quit&quot;</span>)</span></span>;</span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;button, &amp;QPushButton::clicked, &amp;app, &amp;QApplication::quit);</span><br><span class="line"></span><br><span class="line">    button.<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们按照前面文章中介绍的在 Qt Creator 中创建工程的方法创建好工程，然后将main()函数修改为上面的代码。点击运行，我们会看到一个按钮，上面有“Quit”字样。点击按钮，程序退出。</p>
+<p>connect()函数最常用的一般形式：<code>connect(sender, signal, receiver, slot);</code></p>
+<p>参数：</p>
+<ul>
+<li>sender：发出信号的对象</li>
+<li>signal：发送对象发出的信号</li>
+<li>receiver：接收信号的对象</li>
+<li>slot：接收对象在接收到信号之后所需要调用的函数</li>
+</ul>
+<p><strong>信号槽要求信号和槽的参数一致，所谓一致，是参数类型一致。如果不一致，允许的情况是，槽函数的参数可以比信号的少，即便如此，槽函数存在的那些参数的顺序也必须和信号的前面几个一致起来。这是因为，你可以在槽函数中选择忽略信号传来的数据（也就是槽函数的参数比信号的少），但是不能说信号根本没有这个数据，你就要在槽函数中使用（就是槽函数的参数比信号的多，这是不允许的）。</strong></p>
+<p>如果信号槽不符合，或者根本找不到这个信号或者槽函数，比如我们改成：</p>
+<p><code>connect(&amp;button, &amp;QPushButton::clicked, &amp;QApplication::quit2);</code></p>
+<p>由于 QApplication 没有 quit2 这样的函数，因此在编译时会有编译错误：</p>
+<p><code>&#39;quit2&#39; is not a member of QApplication</code></p>
+<p>这样，使用成员函数指针我们就不会担心在编写信号槽的时候出现函数错误。</p>
+<p>l  Qt4 的书写方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">        <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>; </span><br><span class="line"></span><br><span class="line">        QPushButton *button = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(<span class="string">&quot;Quit&quot;</span>); </span><br><span class="line"></span><br><span class="line">        <span class="built_in">connect</span>(button, <span class="built_in">SIGNAL</span>(<span class="built_in">clicked</span>()), &amp;a, <span class="built_in">SLOT</span>(<span class="built_in">quit</span>())); </span><br><span class="line"></span><br><span class="line">        button-&gt;<span class="built_in">show</span>(); </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> a.<span class="built_in">exec</span>(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里使用了<strong>SIGNAL和SLOT这两个宏，将两个函数名转换成了字符串</strong>。注意到connect()函数的 signal 和 slot 都是接受字符串，一旦出现连接不成功的情况，<strong>Qt4是没有编译错误的</strong>（因为一切都是字符串，编译期是不检查字符串是否匹配），而是在运行时给出错误。这无疑会增加程序的不稳定性。</p>
+<p>l  Qt5在语法上完全兼容Qt4</p>
+<h2 id="1-2-自定义信号槽"><a href="#1-2-自定义信号槽" class="headerlink" title="1.2 自定义信号槽"></a>1.2 自定义信号槽</h2><p>使用connect()可以让我们连接系统提供的信号和槽。但是，Qt 的信号槽机制并不仅仅是使用系统提供的那部分，还会允许我们自己设计自己的信号和槽。</p>
+<p>下面我们看看使用 Qt 的信号槽，实现一个报纸和订阅者的例子：</p>
+<p>有一个报纸类Newspaper，有一个订阅者类Subscriber。Subscriber可以订阅Newspaper。这样，当Newspaper有了新的内容的时候，Subscriber可以立即得到通知。</p>
+<p> ////////// newspaper.h //////////</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Newspaper</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Newspaper</span>(<span class="keyword">const</span> QString &amp; name) :</span><br><span class="line"></span><br><span class="line">        <span class="built_in">m_name</span>(name)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">send</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="function">emit <span class="title">newPaper</span><span class="params">(m_name)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">signals:</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">newPaper</span><span class="params">(<span class="keyword">const</span> QString &amp;name)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QString m_name;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>////////// reader.h //////////</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QObject&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QDebug&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Reader</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line">    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Reader</span>() &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">receiveNewspaper</span><span class="params">(<span class="keyword">const</span> QString &amp; name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;Receives Newspaper: &quot;</span> &lt;&lt; name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>////////// main.cpp //////////</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QCoreApplication&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;newspaper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;reader.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">QCoreApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Newspaper <span class="title">newspaper</span><span class="params">(<span class="string">&quot;Newspaper A&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    Reader reader;</span><br><span class="line"></span><br><span class="line">    QObject::<span class="built_in">connect</span>(&amp;newspaper, &amp;Newspaper::newPaper, &amp;reader,    &amp;Reader::receiveNewspaper);</span><br><span class="line"></span><br><span class="line">    newspaper.<span class="built_in">send</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.<span class="built_in">exec</span>();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><p>首先看Newspaper这个类。这个类继承了QObject类。<strong>只有继承了QObject类的类，才具有信号槽的能力。</strong>所以，为了使用信号槽，必须继承QObject。<strong>凡是QObject类（不管是直接子类还是间接子类），都应该在第一行代码写上Q_OBJECT</strong>。不管是不是使用信号槽，都应该添加这个宏。这个宏的展开将为我们的类提供信号槽机制、国际化机制以及 Qt 提供的不基于 C++ RTTI 的反射能力。</p>
+</li>
+<li><p>Newspaper类的 public 和 private 代码块都比较简单，只不过它新加了一个 signals。signals 块所列出的，就是该类的信号。<strong>信号就是一个个的函数名，返回值是 void（因为无法获得信号的返回值，所以也就无需返回任何值），参数是该类需要让外界知道的数据。信号作为函数名，不需要在 cpp 函数中添加任何实现。</strong></p>
+</li>
+<li><p>Newspaper类的send()函数比较简单，只有一个语句emit newPaper(m_name);。emit 是 Qt 对 C++ 的扩展，是一个关键字（其实也是一个宏）。emit 的含义是发出，也就是发出newPaper()信号。感兴趣的接收者会关注这个信号，可能还需要知道是哪份报纸发出的信号？所以，我们将实际的报纸名字m_name当做参数传给这个信号。当接收者连接这个信号时，就可以通过槽函数获得实际值。这样就完成了数据从发出者到接收者的一个转移。</p>
+</li>
+<li><p>Reader类更简单。因为这个类需要接受信号，所以我们将其继承了QObject，并且添加了Q_OBJECT宏。后面则是默认构造函数和一个普通的成员函数。<strong>Qt 5 中，任何成员函数、static 函数、全局函数和 Lambda 表达式都可以作为槽函数。</strong>与信号函数不同，槽函数必须自己完成实现代码。槽函数就是普通的成员函数，因此作为成员函数，也会受到 public、private 等访问控制符的影响。（如果信号是 private 的，这个信号就不能在类的外面连接，也就没有任何意义。）</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="自定义信号槽需要注意的事项"><a href="#自定义信号槽需要注意的事项" class="headerlink" title="自定义信号槽需要注意的事项"></a><strong>自定义信号槽需要注意的事项</strong></h3><blockquote>
+<ul>
+<li><p><strong>发送者和接收者都需要是QObject的子类（当然，槽函数是全局函数、Lambda 表达式等无需接收者的时候除外）；</strong></p>
+</li>
+<li><p><strong>使用 signals 标记信号函数，信号是一个函数声明，返回 void，不需要实现函数代码；</strong></p>
+</li>
+<li><p><strong>槽函数是普通的成员函数，作为成员函数，会受到 public、private、protected 的影响；</strong></p>
+</li>
+<li><p><strong>使用 emit 在恰当的位置发送信号；</strong></p>
+</li>
+<li><p><strong>使用QObject::connect()函数连接信号和槽。</strong></p>
+</li>
+<li><p><strong>任何成员函数、static 函数、全局函数和 Lambda 表达式都可以作为槽函数</strong></p>
+</li>
+</ul>
+</blockquote>
+<h3 id="信号槽的更多用法"><a href="#信号槽的更多用法" class="headerlink" title="信号槽的更多用法"></a><strong>信号槽的更多用法</strong></h3><blockquote>
+<ul>
+<li><p>一个信号可以和多个槽相连</p>
+<p><strong>如果是这种情况，这些槽会一个接一个的被调用，但是它们的</strong>调用顺序是不确定的。</p>
+</li>
+<li><p>多个信号可以连接到一个槽</p>
+<p><strong>只要任意一个信号发出，这个槽就会被调用</strong>。</p>
+</li>
+<li><p>一个信号可以连接到另外的一个信号</p>
+<p><strong>当第一个信号发出时，第二个信号被发出。除此之外，这种信号-信号的形式和信号-槽的形式没有什么区别。</strong></p>
+</li>
+<li><p>槽可以被取消链接</p>
+<p>这种情况并不经常出现，因为<strong>当一个对象delete之后，Qt自动取消所有连接到这个对象上面的槽</strong>。</p>
+</li>
+<li><p>使用Lambda 表达式</p>
+<p>在使用 Qt 5 的时候，能够支持 Qt 5 的编译器都是支持 Lambda 表达式的。</p>
+<p>我们的代码可以写成下面这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QObject::<span class="built_in">connect</span>(&amp;newspaper, <span class="keyword">static_cast</span>&lt;<span class="built_in"><span class="keyword">void</span></span> (Newspaper:: *)</span><br><span class="line"></span><br><span class="line">(<span class="keyword">const</span> QString &amp;)&gt;(&amp;Newspaper::newPaper),=](<span class="keyword">const</span> QString &amp;name) </span><br><span class="line"></span><br><span class="line">&#123; <span class="comment">/* Your code here. */</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在连接信号和槽的时候，槽函数可以使用Lambda表达式的方式进行处理。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><blockquote>
+<ul>
+<li><p>一个信号可以和多个槽相连，如果是这种情况，这些槽会一个接一个的被调用，但是它们的调用顺序是不确定的。</p>
+</li>
+<li><p>多个信号可以连接到一个槽，只要任意一个信号发出，这个槽就会被调用。</p>
+</li>
+<li><p>一个信号可以连接到另外的一个信号，当第一个信号发出时，第二个信号被发出。除此之外，这种信号-信号的形式和信号-槽的形式没有什么区别。</p>
+</li>
+<li><p>槽可以被取消链接,这种情况并不经常出现，因为当一个对象delete之后，Qt自动取消所有连接到这个对象上面的槽。</p>
+</li>
+<li><p>Qt4版本的信号槽写法</p>
+</li>
+</ul>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">connect</span>(tea,<span class="built_in">SIGNAL</span>(<span class="built_in">hungry</span>()), stu, <span class="built_in">SLOT</span>(<span class="built_in">treat</span>()))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Qt5版本的信号槽写法</li>
+</ul>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">connect</span>(tea, &amp;Teacher::hungry, stu, &amp;Student::treat)</span><br></pre></td></tr></table></figure>
+</blockquote>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>作者:</span>
+                        <span>Naiv</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/C-C/">
+                            <i class="iconfont icon-tag1"></i>
+                            C/C++
+                        </a>
+                    
+                        <a href="/tags/Qt/">
+                            <i class="iconfont icon-tag1"></i>
+                            Qt
+                        </a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="/">
+                    <i class="iconfont icon-home"></i>
+                    主页
+                </a>
+                <span>· </span>
+                <a href="javascript:window.history.back();">
+                    <i class="iconfont icon-back"></i>
+                    返回
+                </a>
+                
+                
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/04/2021-04-04-%E6%B5%99%E6%B1%9F%E5%A4%A7%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%E8%A7%A3--%E7%BC%96%E7%A8%8B%E9%A2%98/">浙江大学数据结构2021春--编程题</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/20/2021-03-20-Qt%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">Qt学习笔记（一）</a>
+            
+        </section>
+        <br>
+        
+            <section id="comments" class="comments">
+              <style>
+                  .comments{ margin-top: 30px;}
+                  .v .vlist .vcard .vcontent {padding-top: 0;}
+                  .vcontent p { color:grey; margin-bottom: 10px;}
+                  .v * {line-height: normal;}
+                  .v .vwrap  {border-radius: 0px; padding: 10px;}
+                  .v .vbtn {border-radius: 0px;}
+                  .v code, .v pre {border-radius: 0px;}
+                  .v .vlist .vcard .vhead .vsys {border-radius: 1px; padding: 2px;}
+                  .v .vlist .vcard .vhead .vnick {color: #2d96bd;}
+                  .v .vlist .vcard .vh .vmeta .vat{color: #c7254e;}
+                  .v .vlist .vcard {padding-top: 0;}
+                  .v .vlist .vcard .vimg { width: 2.5em; height: 2.5em; }
+                  .v .vlist .vcard .vquote .vimg { width: 2.5em; height: 2.5em; }
+              </style>
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '.valine_comment',
+        app_id: '1PTJXbrdVcQCMR1j0JLlpHCU-gzGzoHsz',
+        app_key: '56lf22kttbniHlMSEFsawHHc',
+        placeholder: '想对作者说点什么...',
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        visitor: 'true'
+    });
+</script>
+            </section>
+        
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Naiv | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>   <!--改动过 & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a>  -->   </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
