@@ -599,6 +599,20 @@ mjx-container[display="true"] + br {
 <ul>
 <li>空间复杂度：O(mn)，其中 m 和 n 分别是数组 nums1和 nums2 的长度。创建了 m+1 行 n+1 列的二维数组 dp。</li>
 </ul>
+<h4 id="810-黑板异或游戏"><a href="#810-黑板异或游戏" class="headerlink" title="810. 黑板异或游戏"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/chalkboard-xor-game/">810. 黑板异或游戏</a></h4><p>2021-5-22，袁老逝世的消息太让人震惊了，袁老一路走好！</p>
+<p><strong>思路</strong></p>
+<p>要什么思路，我可不会！</p>
+<p><strong>代码</strong></p>
+<p>你问我代码哪来的？当然是CV啦~</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> {</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">xorGame</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() % <span class="number">2</span> == <span class="number">0</span>) {</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">int</span> xorsum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) {</span><br><span class="line">            xorsum ^= num;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> xorsum == <span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line">作者：LeetCode-Solution</span><br><span class="line">链接：https:<span class="comment">//leetcode-cn.com/problems/chalkboard-xor-game/solution/hei-ban-yi-huo-you-xi-by-leetcode-soluti-eb0c/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：O(n)，其中 n 是数组 nums 的长度。最坏情况下，需要遍历数组一次，计算全部元素的异或结果。</p>
+</li>
+<li><p>空间复杂度：O(1)。</p>
+</li>
+</ul>
 
         </div>
 
