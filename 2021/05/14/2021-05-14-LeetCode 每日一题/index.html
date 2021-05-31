@@ -685,6 +685,29 @@ mjx-container[display="true"] + br {
 <p><strong>复杂度分析：</strong></p>
 <p>时间复杂度：O(1)</p>
 <p>空间复杂度：O(1)</p>
+<h4 id="342-4的幂"><a href="#342-4的幂" class="headerlink" title="342. 4的幂"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/power-of-four/">342. 4的幂</a></h4><p>2021-05-31，乒乓球考试终于考完啦~</p>
+<p><strong>方法一：二进制表示中 1 的位置</strong></p>
+<p><strong>思路</strong></p>
+<p>先判断是不是2的倍数，再判断是不是4的倍数。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> {</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfFour</span><span class="params">(<span class="keyword">int</span> n)</span> </span>{</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">0b101010101010101010101010101010101</span>;</span><br><span class="line">        <span class="keyword">return</span> n&gt;<span class="number">0</span> &amp;&amp; (n&amp;(n<span class="number">-1</span>))==<span class="number">0</span> &amp;&amp; (x&amp;n)!=<span class="number">0</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(1)</p>
+<p>空间复杂度：O(1）</p>
+<p><strong>方法二：取模性质</strong></p>
+<p><strong>思路</strong></p>
+<p>4的幂有两条性质：</p>
+<ol>
+<li>二进制中只有一个1</li>
+<li>除以3余1</li>
+</ol>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> {</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfFour</span><span class="params">(<span class="keyword">int</span> n)</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> n&gt;<span class="number">0</span> &amp;&amp; (n&amp;(n<span class="number">-1</span>))==<span class="number">0</span> &amp;&amp; ((n%<span class="number">3</span>)==<span class="number">1</span>);</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<p>时间复杂度：O(1)</p>
+<p>空间复杂度：O(1）</p>
 
         </div>
 
