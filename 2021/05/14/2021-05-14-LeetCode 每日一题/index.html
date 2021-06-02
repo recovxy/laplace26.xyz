@@ -437,7 +437,7 @@ mjx-container[display="true"] + br {
         </header>
 
         <div class="post-content">
-            <p><strong>LeetCode每日一题打卡开始于2021-05-14，预计打卡至大四毕业，总共两年多，我不想再当咸鱼了（逃。</strong></p>
+            <p><strong>LeetCode每日一题打卡开始于2021-05-14，预计打卡至大四毕业，总共两年多，每天都会打卡，但不一定会更新到这上面。我不想再当咸鱼了（逃。</strong></p>
 <h4 id="12-整数转罗马数字"><a href="#12-整数转罗马数字" class="headerlink" title="12. 整数转罗马数字"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-to-roman/">12. 整数转罗马数字</a></h4><p>2021-05-14，数电课延后一周再上，上完我就要开始学了。</p>
 <p><strong>方法一：模拟</strong></p>
 <p><strong>思路</strong></p>
@@ -708,6 +708,17 @@ mjx-container[display="true"] + br {
 <p><strong>复杂度分析</strong></p>
 <p>时间复杂度：O(1)</p>
 <p>空间复杂度：O(1）</p>
+<h4 id="523-连续的子数组和"><a href="#523-连续的子数组和" class="headerlink" title="523. 连续的子数组和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/continuous-subarray-sum/">523. 连续的子数组和</a></h4><p>2021-06-02，昨天遇见一位很可爱的女生，幸好要到了联系方式，否则我真的会挂念很久的。一开始也是怂了，其实只要敢迈出这一步真的不难…</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># qian<span class="meta-string">'zhui</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">class Solution {</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">public:</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    bool checkSubarraySum(vector&lt;int&gt;&amp; nums, int k) {</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        int m = nums.size();</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        if (m &lt; 2) {</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            return false;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        }</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        unordered_map&lt;int, int&gt; mp;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        mp[0] = -1;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        int remainder = 0;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for (int i = 0; i &lt; m; i++) {</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            remainder = (remainder + nums[i]) % k;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            if (mp.count(remainder)) {</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                int prevIndex = mp[remainder];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                if (i - prevIndex &gt;= 2) {</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    return true;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                }</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            } else {</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                mp[remainder] = i;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            }</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        }</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        return false;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    }</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">};</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：O(m)，其中 mm 是数组 nums 的长度。需要遍历数组一次。</p>
+</li>
+<li><p>空间复杂度：O(min(m,k))，其中 m 是数组 nums 的长度。空间复杂度主要取决于哈希表，哈希表中存储每个余数第一次出现的下标，最多有 min(m,k) 个余数。</p>
+</li>
+</ul>
 
         </div>
 
