@@ -719,6 +719,19 @@ mjx-container[display="true"] + br {
 <li><p>空间复杂度：O(min(m,k))，其中 m 是数组 nums 的长度。空间复杂度主要取决于哈希表，哈希表中存储每个余数第一次出现的下标，最多有 min(m,k) 个余数。</p>
 </li>
 </ul>
+<h4 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160. 相交链表"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">160. 相交链表</a></h4><p>2021-06-04，走到尽头见不到你，于是走过你来时的路，等到相遇时才发现，你也走过我来时的路。</p>
+<p><strong>思路</strong></p>
+<p>利用集合，先遍历一遍链表A，将A中的所节点存入set，再遍历链表B，如果遇到当B中的某一节点出现在set中，说明该节点是相交节点，返回该节点即可，没找到返回<code>null</code>。</p>
+<p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode {</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) {}</span></span><br><span class="line"><span class="comment"> * };</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> {</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">getIntersectionNode</span><span class="params">(ListNode *headA, ListNode *headB)</span> </span>{</span><br><span class="line">        unordered_set&lt;ListNode *&gt; Set;</span><br><span class="line">        ListNode *p = headA;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(p){</span><br><span class="line">            Set.<span class="built_in">insert</span>(p);</span><br><span class="line">            p=p-&gt;next;</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">        p=headB;</span><br><span class="line">        <span class="keyword">while</span>(p){</span><br><span class="line">            <span class="keyword">if</span>(Set.<span class="built_in">find</span>(p)!=Set.<span class="built_in">end</span>())</span><br><span class="line">                <span class="keyword">return</span> p;</span><br><span class="line">            p=p-&gt;next;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度分析</strong></p>
+<ul>
+<li><p>时间复杂度：O(m+n)，其中 m 和 n 是分别是链表 headA 和 headB 的长度。两个指针同时遍历两个链表，每个指针遍历两个链表各一次。</p>
+</li>
+<li><p>空间复杂度：O(1)。</p>
+</li>
+</ul>
 
         </div>
 
