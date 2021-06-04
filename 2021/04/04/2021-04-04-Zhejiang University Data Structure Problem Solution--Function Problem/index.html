@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN en-US">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Naiv">
+
+
+
+    <meta name="description" content="Code for fun">
+
+
+    <meta name="keywords" content="学生,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,博客,人工智能,神经网络,深度学习,工科,python,Developer,Programmer,Coder,Geek">
+
+
+<title>浙江大学数据结构2021春--函数题 | Naiv&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/assets/blogImg/%E5%A4%B4%E5%83%8F.jpg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1614813_fp9wxdcpr9c.css"
+<meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Naiv&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categorys "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Naiv&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">
+                        
+                            <i class="iconfont icon-archives "></i>
+                        
+                        
+                        
+                        
+                        Posts
+                    </a>
+                
+                    <a class="menu-item" href="/category">
+                        
+                        
+                            <i class="iconfont icon-categorys "></i>
+                        
+                        
+                        
+                        Categories
+                    </a>
+                
+                    <a class="menu-item" href="/tag">
+                        
+                        
+                        
+                            <i class="iconfont icon-tags "></i>
+                        
+                        
+                        Tags
+                    </a>
+                
+                    <a class="menu-item" href="/about">
+                        
+                        
+                        
+                        
+                            <i class="iconfont icon-about "></i>
+                        
+                        About
+                    </a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">▶︎ 展开目录</a>
+    </div>
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a onclick="go_top()">△ 顶部</a>
+        <a onclick="go_bottom()">▽ 底部</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "▼ 收起目录"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "▶︎ 展开目录"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">浙江大学数据结构2021春--函数题</h1>
+            
+                <div class="post-meta">
+                    
+                        <!--作者:-->
+                        <i class="iconfont icon-user"></i>
+                        <a itemprop="author" rel="author" href="/">Naiv </a> &nbsp;
+                    
+
+                    
+                        <span class="post-time">
+                        <!--发布时间:-->
+                        <i class="iconfont icon-time"></i>
+                        <a href="#">April, 04, 2021  <!-- 改动过 &nbsp;&nbsp;0:00:00   -->    
+                        </a>   &nbsp;
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                        <!--分类:-->
+                        <i class="iconfont icon-category"></i>
+                            
+                                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    <span id="/2021/04/04/2021-04-04-Zhejiang%20University%20Data%20Structure%20Problem%20Solution--Function%20Problem/" class="leancloud-visitors view" data-flag-title="浙江大学数据结构2021春--函数题">
+                        <text class="post-meta-item-text">
+                            <!--阅读数:-->
+                            <i class="iconfont icon-view"></i>
+                        </text>
+                        
+                        <text class="leancloud-visitors-count">加载中</text>
+                      </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="01-复杂度3-二分查找-20-分"><a href="#01-复杂度3-二分查找-20-分" class="headerlink" title="01-复杂度3 二分查找 (20 分)"></a>01-复杂度3 二分查找 (20 分)</h1><p>本题要求实现二分查找算法。</p>
+<p><strong>函数接口定义：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Position <span class="title">BinarySearch</span><span class="params">( List L, ElementType X )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>List</code>结构定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Position;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">List</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> {</span></span><br><span class="line">    ElementType Data[MAXSIZE];</span><br><span class="line">    Position Last; <span class="comment">/* 保存线性表中最后一个元素的位置 */</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+
+<p><code>L</code>是用户传入的一个线性表，其中<code>ElementType</code>元素可以通过&gt;、==、&lt;进行比较，并且题目保证传入的数据是递增有序的。函数<code>BinarySearch</code>要查找<code>X</code>在<code>Data</code>中的位置，即数组下标（注意：元素从下标1开始存储）。找到则返回下标，否则返回一个特殊的失败标记<code>NotFound</code>。</p>
+<p><strong>裁判测试程序样例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NotFound 0</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElementType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Position;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">List</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> {</span></span><br><span class="line">    ElementType Data[MAXSIZE];</span><br><span class="line">    Position Last; <span class="comment">/* 保存线性表中最后一个元素的位置 */</span></span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function">List <span class="title">ReadInput</span><span class="params">()</span></span>; <span class="comment">/* 裁判实现，细节不表。元素从下标1开始存储 */</span></span><br><span class="line"><span class="function">Position <span class="title">BinarySearch</span><span class="params">( List L, ElementType X )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    List L;</span><br><span class="line">    ElementType X;</span><br><span class="line">    Position P;</span><br><span class="line"></span><br><span class="line">    L = <span class="built_in">ReadInput</span>();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;X);</span><br><span class="line">    P = <span class="built_in">BinarySearch</span>( L, X );</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, P);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 你的代码将被嵌在这里 */</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>输入样例1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">12 31 55 89 101</span><br><span class="line">31</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出样例1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<p><strong>输入样例2：</strong></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span><br><span class="line"><span class="symbol">26 </span><span class="number">78</span> <span class="number">233</span></span><br><span class="line"><span class="number">31</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>输出样例2：</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p><strong>题解：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*思路：先排好序，每次从中间查找，如果待查元素比中间元素小，则待查元素在中间元素左边，更新右边界；如果待查元素比中间元素大，则待查元素在中间元素右边，更新左边界。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">Position <span class="title">BinarySearch</span><span class="params">( List L, ElementType X )</span></span>{</span><br><span class="line">	<span class="keyword">int</span> left, mid, right;</span><br><span class="line">    left = <span class="number">1</span>;</span><br><span class="line">    right = L-&gt;Last;</span><br><span class="line">    <span class="keyword">while</span>(left&lt;=right){ <span class="comment">//左边界不大于右边界</span></span><br><span class="line">        mid = (left+right)/<span class="number">2</span>; <span class="comment">//更新中间值的位置</span></span><br><span class="line">        <span class="keyword">if</span>(X&lt;L-&gt;Data[mid]) <span class="comment">//待查元素小于中间元素的值则更新右边界</span></span><br><span class="line">            right = right<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(X&gt;L-&gt;Data[mid]) <span class="comment">//待查元素小于中间元素的值则更新左边界</span></span><br><span class="line">            left = mid+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="comment">//其他情况即找到了，则返回位置mid</span></span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">    }</span><br><span class="line">	<span class="keyword">return</span> NotFound;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="02-线性结构1-两个有序链表序列的合并-15-分"><a href="#02-线性结构1-两个有序链表序列的合并-15-分" class="headerlink" title="02-线性结构1 两个有序链表序列的合并 (15 分)"></a>02-线性结构1 两个有序链表序列的合并 (15 分)</h1><p>本题要求实现一个函数，将两个链表表示的递增整数序列合并为一个非递减的整数序列。</p>
+<p><strong>函数接口定义：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List <span class="title">Merge</span><span class="params">( List L1, List L2 )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>List</code>结构定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">PtrToNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> {</span></span><br><span class="line">    ElementType Data; <span class="comment">/* 存储结点数据 */</span></span><br><span class="line">    PtrToNode   Next; <span class="comment">/* 指向下一个结点的指针 */</span></span><br><span class="line">};</span><br><span class="line"><span class="keyword">typedef</span> PtrToNode List; <span class="comment">/* 定义单链表类型 */</span></span><br></pre></td></tr></table></figure>
+
+<p><code>L1</code>和<code>L2</code>是给定的带头结点的单链表，其结点存储的数据是递增有序的；函数<code>Merge</code>要将<code>L1</code>和<code>L2</code>合并为一个非递减的整数序列。应直接使用原序列中的结点，返回归并后的带头结点的链表头指针。</p>
+<p><strong>裁判测试程序样例：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElementType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">PtrToNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> {</span></span><br><span class="line">    ElementType Data;</span><br><span class="line">    PtrToNode   Next;</span><br><span class="line">};</span><br><span class="line"><span class="keyword">typedef</span> PtrToNode List;</span><br><span class="line"></span><br><span class="line"><span class="function">List <span class="title">Read</span><span class="params">()</span></span>; <span class="comment">/* 细节在此不表 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">( List L )</span></span>; <span class="comment">/* 细节在此不表；空链表将输出NULL */</span></span><br><span class="line"></span><br><span class="line"><span class="function">List <span class="title">Merge</span><span class="params">( List L1, List L2 )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    List L1, L2, L;</span><br><span class="line">    L1 = <span class="built_in">Read</span>();</span><br><span class="line">    L2 = <span class="built_in">Read</span>();</span><br><span class="line">    L = <span class="built_in">Merge</span>(L1, L2);</span><br><span class="line">    <span class="built_in">Print</span>(L);</span><br><span class="line">    <span class="built_in">Print</span>(L1);</span><br><span class="line">    <span class="built_in">Print</span>(L2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 你的代码将被嵌在这里 */</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>输入样例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1 3 5</span><br><span class="line">5</span><br><span class="line">2 4 6 8 10</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出样例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 2 3 4 5 6 8 10 </span><br><span class="line">NULL</span><br><span class="line">NULL</span><br></pre></td></tr></table></figure>
+
+<p><strong>题解：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">List <span class="title">Merge</span><span class="params">( List L1, List L2 )</span></span>{</span><br><span class="line">    List pHead = (List)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct Node)); <span class="comment">//创建一个头节点准备接收合并后的链表</span></span><br><span class="line">    pHead-&gt;Next = <span class="literal">NULL</span>;</span><br><span class="line">    List p1 = L1-&gt;Next; <span class="comment">//带头节点的链表从头节点下一个位置开始存储数据</span></span><br><span class="line">    List p2 = L2-&gt;Next; <span class="comment">//获取L1,L2的第一个有数据的节点</span></span><br><span class="line">    List p3 = pHead; <span class="comment">//创建p1,p2,p3来分别操作L1，L2，pHead(合并后的新链表)是在他们上面移动，并不改变他们本身</span></span><br><span class="line">    <span class="keyword">while</span>(p1&amp;&amp;p2){ <span class="comment">//当两个节点都不为空时一直循环</span></span><br><span class="line">        <span class="keyword">if</span>(p1-&gt;Data &lt; p2-&gt;Data){ <span class="comment">//若p1指向的节点数据的值小于p2的则让p1连接到p3后面，即谁小把谁连接到p3后面</span></span><br><span class="line">            p3-&gt;Next = p1; <span class="comment">//把p1连到p3后面</span></span><br><span class="line">            p3 = p1; <span class="comment">//更新p3指向的位置，以便让下一个节点连接</span></span><br><span class="line">            p1 = p1-&gt;Next; <span class="comment">//p1指向L1的下一个节点</span></span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span>{</span><br><span class="line">            p3-&gt;Next = p2;</span><br><span class="line">            p3 = p2;</span><br><span class="line">            p2 = p2-&gt;Next;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span>(p1) p3-&gt;Next = p1; <span class="comment">//如果p1不为空，则还有节点未连接，将剩下的节点连接到p3后面</span></span><br><span class="line">    <span class="keyword">if</span>(p2) p3-&gt;Next = p2; <span class="comment">//如果p2不为空，则还有节点未连接，将剩下的节点连接到p3后面</span></span><br><span class="line">    L1-&gt;Next = <span class="literal">NULL</span>; <span class="comment">//L1指空</span></span><br><span class="line">    L2-&gt;Next = <span class="literal">NULL</span>; <span class="comment">//L2指空</span></span><br><span class="line">    <span class="keyword">return</span> pHead; <span class="comment">//返回合并后的新链表的头节点</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>未完待续…</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>作者:</span>
+                        <span>Naiv</span>
+                    </p>
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                            <i class="iconfont icon-tag1"></i>
+                            数据结构
+                        </a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="/">
+                    <i class="iconfont icon-home"></i>
+                    主页
+                </a>
+                <span>· </span>
+                <a href="javascript:window.history.back();">
+                    <i class="iconfont icon-back"></i>
+                    返回
+                </a>
+                
+                
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/04/04/2021-04-04-Zhejiang%20University%20Data%20Structure%20Problem%20Solution--Programming%20Problem/">浙江大学数据结构2021春--编程题</a>
+            
+            
+            <a class="next" rel="next" href="/2021/03/21/2021-03-21-Qt%20study%20notes%20(2)/">Qt学习笔记（二）</a>
+            
+        </section>
+        <br>
+        
+            <section id="comments" class="comments">
+              <style>
+                  .comments{ margin-top: 30px;}
+                  .v .vlist .vcard .vcontent {padding-top: 0;}
+                  .vcontent p { color:grey; margin-bottom: 10px;}
+                  .v * {line-height: normal;}
+                  .v .vwrap  {border-radius: 0px; padding: 10px;}
+                  .v .vbtn {border-radius: 0px;}
+                  .v code, .v pre {border-radius: 0px;}
+                  .v .vlist .vcard .vhead .vsys {border-radius: 1px; padding: 2px;}
+                  .v .vlist .vcard .vhead .vnick {color: #2d96bd;}
+                  .v .vlist .vcard .vh .vmeta .vat{color: #c7254e;}
+                  .v .vlist .vcard {padding-top: 0;}
+                  .v .vlist .vcard .vimg { width: 2.5em; height: 2.5em; }
+                  .v .vlist .vcard .vquote .vimg { width: 2.5em; height: 2.5em; }
+              </style>
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--Valine 的核心代码库-->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '.valine_comment',
+        app_id: '1PTJXbrdVcQCMR1j0JLlpHCU-gzGzoHsz',
+        app_key: '56lf22kttbniHlMSEFsawHHc',
+        placeholder: '想对作者说点什么...',
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        visitor: 'true'
+    });
+</script>
+            </section>
+        
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Naiv | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>   <!--改动过 & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a>  -->   </span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
