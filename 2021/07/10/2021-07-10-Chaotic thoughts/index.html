@@ -16,7 +16,7 @@
     <meta name="keywords" content="学生,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,博客,人工智能,神经网络,深度学习,工科,python,Developer,Programmer,Coder,Geek">
 
 
-<title>C++的new与delete | izshy&#39;s Blog</title>
+<title>纷乱的思绪，永不凋零的花 | izshy&#39;s Blog</title>
 
 
 
@@ -357,7 +357,7 @@ mjx-container[display="true"] + br {
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">C++的new与delete</h1>
+            <h1 class="post-title">纷乱的思绪，永不凋零的花</h1>
             
                 <div class="post-meta">
                     
@@ -370,7 +370,7 @@ mjx-container[display="true"] + br {
                         <span class="post-time">
                         <!--发布时间:-->
                         <i class="iconfont icon-time"></i>
-                        <a href="#">March, 12, 2021  <!-- 改动过 &nbsp;&nbsp;0:00:00   -->    
+                        <a href="#">July, 10, 2021  <!-- 改动过 &nbsp;&nbsp;0:00:00   -->    
                         </a>   &nbsp;
                         </span>
                     
@@ -379,7 +379,7 @@ mjx-container[display="true"] + br {
                         <!--分类:-->
                         <i class="iconfont icon-category"></i>
                             
-                                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>&nbsp;
+                                <a href="/categories/%E6%9D%82%E8%AE%B0/">杂记</a>&nbsp;
                             
                         </span>
                     
@@ -390,7 +390,9 @@ mjx-container[display="true"] + br {
                           <span class="iconfont icon-tags"></span>
                             <span>
                                 
-                                    <a href="/tags/C-C/">C/C++ </a>&nbsp;
+                                    <a href="/tags/%E9%9A%8F%E6%83%B3/">随想 </a>&nbsp;
+                                
+                                    <a href="/tags/%E6%91%98%E6%8A%84/">摘抄 </a>&nbsp;
                                 
                             </span>
                           
@@ -398,7 +400,7 @@ mjx-container[display="true"] + br {
 
 
                     
-                    <span id="/2021/03/12/2021-03-12-C++%20new%20and%20delete/" class="leancloud-visitors view" data-flag-title="C++的new与delete">
+                    <span id="/2021/07/10/2021-07-10-Chaotic%20thoughts/" class="leancloud-visitors view" data-flag-title="纷乱的思绪，永不凋零的花">
                         <text class="post-meta-item-text">
                             <!--阅读数:-->
                             <i class="iconfont icon-view"></i>
@@ -410,7 +412,7 @@ mjx-container[display="true"] + br {
                 
 
                 <div>
-    <span class="post-count">字数：270</span> 
+    <span class="post-count">字数：467</span> 
     &nbsp;
     <span class="post-count">阅读时间：1分钟</span>
     &nbsp
@@ -420,24 +422,27 @@ mjx-container[display="true"] + br {
         </header>
 
         <div class="post-content">
-            <p>我们先定义一个complex类</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>{</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> m_real;</span><br><span class="line">    <span class="keyword">double</span> m_imag;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Complex</span>(...){...} <span class="comment">//构造函数，创建对象开始就自动调用</span></span><br><span class="line">    ~<span class="built_in">Complex</span>(...){...} <span class="comment">//析构函数，当这个对象的“生命结束”时自动调用</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-
-<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>现在我们要创建一个complex指针并赋初值</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Complex* pc=<span class="keyword">new</span> <span class="built_in">Complex</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
-
-<p>编译器会将这个过程转化为以下三步：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">① <span class="keyword">void</span>* mem = <span class="keyword">operator</span> <span class="built_in"><span class="keyword">new</span></span>(<span class="built_in"><span class="keyword">sizeof</span></span>(Complex)); <span class="comment">//先分配内存给一个空指针,内部调用了malloc(n)</span></span><br><span class="line">② pc = <span class="keyword">static_cast</span>&lt;Complex*&gt;(mem);	<span class="comment">//再将这个空指针的类型转换为Complex*</span></span><br><span class="line">③ pc-&gt;Complex::<span class="built_in">Complex</span>(<span class="number">1</span>,<span class="number">2</span>); <span class="comment">//调用构造函数</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p>现在我们要释放这块内存</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delepe pc;</span><br></pre></td></tr></table></figure>
-
-<p>编译器会转化为以下两步：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">① Complex::~<span class="built_in">Complex</span>(pc); <span class="comment">//析构函数</span></span><br><span class="line">② <span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(pc)</span></span>; <span class="comment">//释放内存，内部调用了free(pc);</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="delete-1"><a href="#delete-1" class="headerlink" title="delete[]"></a>delete[]</h2><p>当我们声明一个数组后,释放它时为了避免内存泄漏就应使用delete[]，尽管不一定会造成内存泄漏，但我们使用delete[] 是一个好习惯。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Complex* p = <span class="keyword">new</span> Copmpex[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">delete</span>[] p; <span class="comment">//实际调用了3（数组的大小）次析构函数</span></span><br></pre></td></tr></table></figure>
-
+            <p><strong>不定期更新，有了我再贴上来…</strong></p>
+<h3 id="纷乱的思绪"><a href="#纷乱的思绪" class="headerlink" title="纷乱的思绪"></a>纷乱的思绪</h3><p>这里记录着我胡乱的思考。</p>
+<ol>
+<li>关于天文和历史，前者试图证明我们并不孤独，而后者试图告诉我们并不孤独。</li>
+<li>在阅读历史时，你从书上看到的短短一页，那却是别人波澜壮阔的一生。</li>
+<li>如果你觉得生活无聊了，请多给自己一些挑战，就不会无聊。</li>
+<li>其实话越少的人要求越多。</li>
+<li>如果你能将这台苹果手机越狱，那它归你了。</li>
+</ol>
+<h3 id="永不凋零的花"><a href="#永不凋零的花" class="headerlink" title="永不凋零的花"></a>永不凋零的花</h3><p>这里记录着那些触动过我的文字。</p>
+<ol>
+<li>如果生活中不在有某种无限的、深刻的、真实的东西，我将不在眷恋人间。 ——梵高《亲爱的提奥》</li>
+<li>成功只有一个——按照自己的方式，去度过人生。 ——当年明月《明朝那些事》</li>
+<li>那时的欧洲正如一位作家所描绘的那样，像一个靠他人“靠通过墙上的缝隙喂养的巨人”，但是，这个巨人的力量和知识正在增长，牢狱的围墙已不能长久地禁锢住他。——斯塔夫鲁阿诺斯《全球通史》</li>
+<li>只要活着的人还活着，死去的人就永远不会死去。 ——梵高</li>
+<li>我们这种人，总有一天会找到自己热爱的节奏，问心无愧地活着。面对别人好奇的探问，解释不了地时候也会气急败坏地丢下一句，你懂什么。</li>
+<li>人必须坚持不懈地生成和创造才能臻于完美。</li>
+<li>接触的人越多，我就越喜欢狗。</li>
+<li>成功是相对的，失败是永恒的。——好像是迟先生@iskyzh</li>
+<li>表面上他们都是网友，但私底下我都说他们是我的粉丝。——炸博士@zmt0516，当时看到也是笑了</li>
+</ol>
 
         </div>
 
@@ -461,9 +466,14 @@ mjx-container[display="true"] + br {
                 <span class="tag">
                     
                     
-                        <a href="/tags/C-C/">
+                        <a href="/tags/%E9%9A%8F%E6%83%B3/">
                             <i class="iconfont icon-tag1"></i>
-                            C/C++
+                            随想
+                        </a>
+                    
+                        <a href="/tags/%E6%91%98%E6%8A%84/">
+                            <i class="iconfont icon-tag1"></i>
+                            摘抄
                         </a>
                     
                         
@@ -485,10 +495,8 @@ mjx-container[display="true"] + br {
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/03/20/2021-03-20-Qt%20study%20notes%20(1)/">Qt学习笔记（一）</a>
             
-            
-            <a class="next" rel="next" href="/2021/02/23/2021-02-23-PAT%20Level%20B%20Brushing%20Questions/">PAT (Basic Level) Practice （中文）刷题</a>
+            <a class="next" rel="next" href="/2021/06/03/2021-06-03-Record%20Catch%20a%20girl%20from%20scratch/">记录：从零开始追一个女生（找一个兄弟）</a>
             
         </section>
         <br>
